@@ -1,0 +1,15 @@
+clear;clc;close
+n1 = 0:6;
+xr1 = (-2).^n1;
+tti = 0:0.1:6; %-- locations between the n1 indices 
+xr1linear = interp1(n1,xr1,tti); %-- function is INTERP-ONE stem(tti,xr1linear)
+subplot(2,1,1)
+plot(n1,xr1)
+subplot(2,1,2)
+
+function [xr1linear] = xxlinear(arr,factor)
+n1 = length(arr)
+linspace(
+tti = 0:0.1:6; %-- locations between the n1 indices 
+xr1linear = interp1(n1,xr1,tti); %-- function is INTERP-ONE stem(tti,xr1linear)
+end

@@ -1,12 +1,14 @@
+%% Downsampled image
 clear;clc
 ww=load('lighthouse.mat');
 ww = ww.ww
 wp = @(p) ww(1:p:end,1:p:end)
 xx3 = wp(3)
-
+show_img(xx3)
+%%
 xr1 = (-2).^(0:6);
 L = length(xr1);
-nn = ceil((0.999:1:4*L)/4) %<-- Round up to the integer part xr1hold = xr1(nn);
+nn = ceil((0.999:1:5*L)/5) %<-- Round up to the integer part xr1hold = xr1(nn);
 % interpolation factor of 4
 subplot(2,1,1)
 size_xr1 =( size(xr1))
@@ -17,15 +19,22 @@ title('xr1')
 subplot(2,1,2)
 plot(0:(length(xr1hold)-1),xr1hold)
 title('xr1hold')
-
 %% 
 xholdrows = []
-for (row = 1:(length(ww(:,1))))
+wp3 = wp(3)
+for (row = 1:(length(wp3(:,1))))
     row
-    xholdrows(row,:) = row_interp(ww(row,:),3)
+    xholdrows(row,:) = row_interp(wp3(row,:),3)
 end
+show_img(xholdrows)
+%%
+xholdcols = []
+for (col = 1:(length(xholdrows)))
+    xholdcols(:,col) = row_interp(xholdrows(:,col)',3)
+end
+show_img(xholdcols)
 %%  Interpolation of downampled image
 function [interp] = row_interp(arr, interp_factor)
-nn = ceil((0.999:1:(interp_factor*length(arr))/interp_factor))
-interp = arr(nn)
+nn = ceil((0.999:1:(interp_factor*length(arr)))/interp_factor);
+interp = arr(nn);
 end

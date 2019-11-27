@@ -24,19 +24,12 @@ xholdrows = []
 wp3 = wp(3)
 for (row = 1:(length(wp3(:,1))))
     row
-    xholdrows(row,:) = row_interp(wp3(row,:),3)
+    xholdrows(row,:) = xxlinear(wp3(row,:),3)
 end
 show_img(xholdrows)
 %%
 xholdcols = []
-wp3 = wp(3)
-for (row = 1:(length(wp3(:,1))))
-    row
-    xholdrows(row,:) = row_interp(wp3(row,:),3)
+for (col = 1:(length(xholdrows)))
+    xholdcols(:,col) = xxlinear(xholdrows(:,col)',3)
 end
-show_img(xholdrows)
-%%  Interpolation of downampled image
-function [interp] = row_interp(arr, interp_factor)
-nn = ceil((0.999:1:(interp_factor*length(arr)))/interp_factor);
-interp = arr(nn);
-end
+show_img(xholdcols)
